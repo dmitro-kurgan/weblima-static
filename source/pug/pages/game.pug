@@ -1,0 +1,31 @@
+extends ../templates/base
+
+block variables
+	- var classBody = 'game-page'
+	- var classWrapper = 'game'
+
+block title
+	title Index
+
+block main
+
+block footer
+	.game__bottom
+		.container
+			.game__bottom-content
+				.game__bottom-left
+					ul.clearfix
+						- var arr = [1,2,3,4]
+						each img in arr
+							li
+								div
+									p JP#{img}
+										img(src=require("../../components/images/" + img + '.svg'), alt="pic")
+									span.
+										$999 999,99
+				.game__bottom-right
+					div
+						p account name
+					a(href="./").btn.btn--close
+						span
+							p close game

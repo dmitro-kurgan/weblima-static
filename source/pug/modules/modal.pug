@@ -1,0 +1,22 @@
+.login#popupLogin
+	.login__close#closePopup(onclick="closePopup()")
+	.login__block
+		form
+			.login__form
+				.form-group.form-group--login
+					input(type="text", placeholder='LOGIN', class='form-control', id='login', autofocus)
+				.form-group.form-group--pwd
+					input(type="text", placeholder='PASSWORD').form-control#pwd
+			.login__key.clearfix
+				- var arraykey = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0']
+				ul.clearfix
+					each item in arraykey
+						li
+							div(onmousedown="triggerkey(event,'" + item + "')")= item
+					li(class='clear')
+						div(onmousedown='backspace(event)') <
+					li(class='cancel')
+						div(onmousedown='cancel(event)') C
+			button.btn.btn--login(type='submit')
+				span
+					p Login

@@ -1,0 +1,145 @@
+extends ../templates/base
+
+block variables
+	- var classBody = 'not-login-page'
+	- var classWrapper = 'not-login'
+
+block title
+	title Index
+
+block video
+	video(src=require('../../components/images/bgvideo.mp4'), type="video/mp4", autoplay, loop)
+
+block header
+	include ../modules/header
+
+block main
+	mixin slide()
+		- var images = [1,2,3,4,5,6,7,8,9,10]
+		div
+			.slick-games__block.clearfix
+				each img in images
+					.slick-games__box
+						.slick-games__img(style="background-image:url(" + require('../../components/images/game-' + img + '.jpg') + ")")
+						.slick-games__info
+							div
+								p.slick-games__name
+									| Everybodys Jackpot
+								a(href="game.html").btn.btn--play
+									span
+										p Play
+	.slick-games-nav
+		ul.container.clearfix
+			li
+				a(href="") all games
+			li
+				a(href="") new games
+			li
+				a(href="") popular
+			li
+				a(href="") live
+			li
+				a(href="") loto
+			li
+				a(href="") sport
+	.slick-games--wrapper.container
+		.slider.slick-games
+			+slide()
+			+slide()
+			+slide()
+			+slide()
+block footer
+	footer
+		.footer
+			.container
+				.footer__content
+					.footer__left
+						a(href="#").btn.btn--prev
+							span
+								p prev
+					.footer__center
+						a(href="#", onclick="showPopup()").btn.btn--login
+							span
+								p login
+					.footer__right
+						a(href="#").btn.btn--next
+							span
+								p next
+block modals
+	include ../modules/modal
+block script
+	script.
+		var popup = document.getElementById("popupLogin"),
+		wrapper = document.getElementsByClassName("wrapper--not-login")[0];
+		function showPopup() {
+		    popup.classList.toggle("show");
+		    wrapper.classList.toggle("blur");
+		}
+		function closePopup() {
+			var close = document.getElementById("closePopup");
+			popup.classList.toggle("show");
+			wrapper.classList.toggle("blur")
+		}
+		function triggerkey(event, key) {
+		  event.preventDefault();
+		  var focused = getFocusedInput();
+		  insertText(focused, key);
+		}
+
+		function insertText(input, text) {
+		  if (input == undefined) {
+		    return;
+		  }
+		  var scrollPos = input.scrollTop;
+		  var pos = 0;
+		  pos = input.selectionStart;
+		  var front = (input.value).substring(0, pos);
+		  var back = (input.value).substring(pos, input.value.length);
+		  input.value = front + text + back;
+		  pos = pos + text.length;
+		  input.selectionStart = pos;
+		  input.selectionEnd = pos;
+		  input.scrollTop = scrollPos;
+		}
+
+		function backspace(event) {
+		  event.preventDefault();
+		  var input = getFocusedInput();
+		  if (input == undefined) {
+		    return;
+		  }
+		  var start = input.selectionStart - 1;
+		  if (start == -1) {
+		    return;
+		  }
+		  var value = input.value;
+		  var newValue = value.substr(0, start) + value.substr(start + 1);
+		  input.value = newValue;
+		  input.selectionStart = start;
+		  input.selectionEnd = start;
+		  input.scrollTop = start;
+		}
+
+		function cancel(event) {
+			event.preventDefault();
+			var input = getFocusedInput();
+			if (input == undefined) {
+				return;
+			}
+			var start = input.selectionStart - 1;
+			if (start == -1) {
+				return;
+			}
+			var value = input.value;
+			var newValue = value = '';
+			input.value = newValue
+		}
+
+		function getFocusedInput() {
+		  var focused = document.activeElement;
+		  if (!focused || focused == document.body)
+		    focused = null;
+		  else if (document.querySelector)
+		    focused = document.querySelector("input:focus");
+		  return focused;
+		}

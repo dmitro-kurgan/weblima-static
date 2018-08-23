@@ -1,0 +1,21 @@
+- var json = require('../../data/nav.json')
+
+block variables
+
+doctype html
+html(lang="en")
+	head
+		block title
+			title Index
+		meta(charset="UTF-8")
+		meta(name="viewport", content="initial-scale=1.0, width=device-width, user-scalable=no")
+		block headscript
+	body(class='' + classBody)
+		div(class='wrapper wrapper--' + classWrapper)
+			block video
+			block header
+			.content
+				block main
+			block footer
+		block modals
+		block script

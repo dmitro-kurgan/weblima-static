@@ -1,0 +1,13 @@
+header
+	.header
+		.header__content
+			.header__top
+				ul.container.clearfix
+					- var arr = [1,2,3,4]
+					each img in arr
+						li
+							div
+								p JP#{img}
+									img(src=require("../../components/images/" + img + '.svg'), alt="pic")
+								span.
+									$999 999,99

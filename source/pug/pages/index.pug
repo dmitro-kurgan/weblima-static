@@ -1,0 +1,71 @@
+extends ../templates/base
+
+block variables
+	- var classBody = 'index-page'
+	- var classWrapper = 'index'
+
+block title
+	title Index
+
+block video
+	video(src=require('../../components/images/bgvideo.mp4'), type="video/mp4", autoplay, loop)
+
+block header
+	include ../modules/header
+	
+block main
+	mixin slide()
+		- var images = [1,2,3,4,5,6,7,8,9,10]
+		div
+			.slick-games__block.clearfix
+				each img in images
+					.slick-games__box
+						.slick-games__img(style="background-image:url(" + require('../../components/images/game-' + img + '.jpg') + ")")
+						.slick-games__info
+							div
+								p.slick-games__name
+									| Everybodys Jackpot
+								a(href="game.html").btn.btn--play
+									span
+										p Play
+	.slick-games-nav
+		ul.container.clearfix
+			li
+				a(href="") all games
+			li
+				a(href="") new games
+			li
+				a(href="") popular
+			li
+				a(href="") live
+			li
+				a(href="") loto
+			li
+				a(href="") sport
+	.slick-games--wrapper.container
+		.slider.slick-games
+			+slide()
+			+slide()
+			+slide()
+			+slide()
+block footer
+	footer
+		.footer
+			.container
+				.footer__content
+					.footer__left
+						a(href="#").btn.btn--prev
+							span
+								p prev
+					.footer__center
+						div
+							p.footer__acc Account:name
+							p.footer__balance Balance:
+								span 200
+						a(href="not-logged-in.html").btn.btn--exit
+							span
+								p exit
+					.footer__right
+						a(href="#").btn.btn--next
+							span
+								p next
